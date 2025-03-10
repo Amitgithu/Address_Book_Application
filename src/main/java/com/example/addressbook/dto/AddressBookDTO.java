@@ -1,6 +1,6 @@
-package com.spring.addressBook.dto;
+package com.example.addressbook.dto;
 
-import com.spring.addressBook.model.AddressBook;
+import com.example.addressbook.model.AddressBook;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
