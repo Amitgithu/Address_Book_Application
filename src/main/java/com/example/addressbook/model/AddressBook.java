@@ -1,6 +1,6 @@
-package com.spring.addressBook.model;
+package com.example.addressbook.model;
 
-import com.spring.addressBook.dto.AddressBookDTO;
+import com.example.addressbook.dto.AddressBookDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
