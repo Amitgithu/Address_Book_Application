@@ -17,16 +17,12 @@ public class AddressBook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String name;
     private String address;
     private long phoneNumber;
 
     public AddressBook(AddressBookDTO addressBookDTO) {
-        this.firstName = addressBookDTO.getFirstName();
-        this.lastName = addressBookDTO.getLastName();
-        this.email = addressBookDTO.getEmail();
+        this.name = addressBookDTO.getName();
         this.address = addressBookDTO.getAddress();
         this.phoneNumber = addressBookDTO.getPhoneNumber();
     }

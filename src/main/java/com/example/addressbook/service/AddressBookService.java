@@ -4,7 +4,6 @@ import com.example.addressbook.dto.AddressBookDTO;
 import com.example.addressbook.interfaces.IAddressBookService;
 import com.example.addressbook.model.AddressBook;
 import com.example.addressbook.repository.AddressBookRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,34 +15,31 @@ public class AddressBookService implements IAddressBookService {
     @Autowired
     AddressBookRepository addressBookRepository;
 
-    ModelMapper modelMapper = new ModelMapper();
-
     @Override
     public List<AddressBookDTO> getAddressBookData() {
         List<AddressBook> addressBooksLists = addressBookRepository.findAll();
         return addressBooksLists.stream()
-                .map(addressBook -> modelMapper.map(addressBook, AddressBookDTO.class))
+                .map(AddressBookDTO::new)
                 .toList();
     }
 
     @Override
     public AddressBookDTO getAddressBookDataById(long id) {
         AddressBook addressBook = addressBookRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee Payroll not found with id: " + id));
-        return modelMapper.map(addressBook, AddressBookDTO.class);
+        return new AddressBookDTO(addressBook);
     }
 
     @Override
     public AddressBookDTO createAddressBookData(AddressBookDTO addressBookDTO) {
         AddressBook addressBook = addressBookRepository.save(new AddressBook(addressBookDTO));
-        return modelMapper.map(addressBook, AddressBookDTO.class);
+        return new AddressBookDTO(addressBook);
     }
 
     @Override
     public boolean updateAddressBookData(long id, AddressBookDTO updatedAddressBookDTO) {
         try {
             AddressBook addressBook = addressBookRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee Payroll not found with id: " + id));
-            addressBook.setFirstName(updatedAddressBookDTO.getFirstName());
-            addressBook.setLastName(updatedAddressBookDTO.getLastName());
+            addressBook.setName(updatedAddressBookDTO.getName());
             addressBook.setAddress(updatedAddressBookDTO.getAddress());
             addressBook.setPhoneNumber(updatedAddressBookDTO.getPhoneNumber());
             addressBookRepository.save(addressBook);
