@@ -34,4 +34,4 @@ build/
 
 
 ### SECRET CREDENTIALS ###
-.env
+src/main/resources/.env
