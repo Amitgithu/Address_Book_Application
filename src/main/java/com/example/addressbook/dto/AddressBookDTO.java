@@ -33,7 +33,7 @@ public class AddressBookDTO {
 
     @NotNull(message = "Address is required.")
     @Pattern(regexp = "^[0-9A-Z][0-9a-zA-Z\\s-/]*$", message = "Address should start with a number or capital letter")
-    @Size(min = 3, max = 50, message = "Last name must be between 3 and 30 characters")
+    @Size(min = 3, max = 50, message = "Address must be between 3 and 30 characters")
     private String address;
 
     @NotNull(message = "Email is required")
