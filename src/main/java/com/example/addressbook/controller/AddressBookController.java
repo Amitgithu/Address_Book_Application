@@ -26,7 +26,7 @@ public class AddressBookController {
      * Endpoint to get all address book entries.
      * @return ResponseEntity with list of AddressBookDTO which contains all address book entries
      */
-    @RequestMapping(path = {"", "/"}, method = RequestMethod.GET)
+    @GetMapping("/")
     public ResponseEntity<ResponseDTO<?>> getAllAddressBook() {
         try {
             List<AddressBookDTO> addressBookData = addressBookService.getAddressBookData();
@@ -60,9 +60,9 @@ public class AddressBookController {
     public ResponseEntity<ResponseDTO<?>> addInAddressBook(@RequestBody AddressBookDTO AddressBookDTO) {
         try {
             AddressBookDTO newAddressBook = addressBookService.createAddressBookData(AddressBookDTO);
-            return new ResponseEntity<>(new ResponseDTO<AddressBookDTO>("Create New Employee Payroll Data", newAddressBook), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseDTO<AddressBookDTO>("Create New Data in addressBook", newAddressBook), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ResponseDTO<AddressBookDTO>("Create New Employee Payroll Data", new AddressBookDTO()), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseDTO<AddressBookDTO>("Create New Data in addressBook", new AddressBookDTO()), HttpStatus.NOT_FOUND);
         }
     }
 

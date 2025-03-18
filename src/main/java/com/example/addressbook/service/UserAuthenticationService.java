@@ -124,7 +124,7 @@ public class UserAuthenticationService implements IUserAuthenticationService {
         UserAuthentication user = existsByEmail(loginDTO.getEmail());
         if (user != null && passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
             String sessionToken = tokenUtil.createToken(user.getUserId(), user.getRole());
-//            user.setSessionToken(sessionToken);
+//          user.setSessionToken(sessionToken);
             redisTemplate.opsForValue().set("session:" + sessionToken, user, 10, TimeUnit.MINUTES);
             emailSenderService.sendEmail(user.getEmail(),"Logged in Successfully!", "Hii...."+user.getFirstName()+"\n\n You have successfully logged in into MyAddressBook App!");
 //            userAuthenticationRepository.save(user);
@@ -221,37 +221,6 @@ public class UserAuthenticationService implements IUserAuthenticationService {
                             + "\nIf this request isn't made by you, just don't worry. Just don't share the below credentials with anyone else\n\n"
                             + "Click the link to reset your password: " + resetLink + "\n\nUse the following token in the header: " + resetToken);
             return "Reset token sent to your email!";
-        } else {
-            throw new UserException("User not found");
-        }
-    }
-
-
-    /**
-     * This method changes the password for a user.
-     * It takes a JWT token and a ChangePasswordDTO object as input,
-     * verifies if the token is valid, updates the password, and sends a success email to the user.
-     *
-     * @param sessionToken - The JWT token of the user whose password is to be changed.
-     * @param changePasswordDTO - The ChangePasswordDTO object containing new password details.
-     * @return String - A success message.
-     * @throws UserException - If any error occurs during password change.
-     */
-    @Override
-    public String changePassword(String sessionToken, ChangePasswordDTO changePasswordDTO) throws UserException {
-        if (tokenUtil.isTokenExpired(sessionToken))
-            throw new UserException("Session expired!");
-
-        long userId = Long.parseLong(tokenUtil.decodeToken(sessionToken));
-        UserAuthentication user = existsById(userId);
-        if (user != null) {
-            String password = changePasswordDTO.getNewPassword();
-            String encodedPassword = passwordEncoder.encode(password);
-            user.setPassword(encodedPassword);
-            user.setResetToken(null);
-            userAuthenticationRepository.save(user);
-            emailSenderService.sendEmail(user.getEmail(),"Password Changed Successfully!", "Hii...."+user.getFirstName()+"\n\n Your password has been changed successfully!");
-            return "Password changed successfully!!";
         } else {
             throw new UserException("User not found");
         }

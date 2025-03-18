@@ -17,6 +17,7 @@ import java.util.Date;
  * Utility class to create and decode JWT tokens.
  * It uses the HMAC256 algorithm for signing the tokens.
  */
+
 @Component
 public class JwtToken {
 
@@ -29,6 +30,7 @@ public class JwtToken {
      * This method is called after the bean is created.
      * It initializes the TOKEN_SECRET variable with the value from environment variables.
      */
+
     @PostConstruct
     public void init() {
         TOKEN_SECRET = env.getProperty("CLIENT_SECRET");

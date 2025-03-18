@@ -7,6 +7,7 @@ import com.example.addressbook.repository.AddressBookRepository;
 import org.hibernate.annotations.Cache;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,6 @@ public class AddressBookService implements IAddressBookService {
      * @return List<AddressBookDTO> - List of AddressBookDTO
      */
     @Override
-    @Cacheable(value = "addressBookCache")
     public List<AddressBookDTO> getAddressBookData() {
         List<AddressBook> addressBooksLists = addressBookRepository.findAll();
         return addressBooksLists.stream()
@@ -75,12 +75,14 @@ public class AddressBookService implements IAddressBookService {
      * @return boolean - true if the update was successful, false otherwise
      */
     @Override
+    @CacheEvict(value = "addressBookCache", key = "#id")
     public boolean updateAddressBookData(long id, AddressBookDTO updatedAddressBookDTO) {
         try {
             AddressBook addressBook = addressBookRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee Payroll not found with id: " + id));
             addressBook.setFirstName(updatedAddressBookDTO.getFirstName());
             addressBook.setLastName(updatedAddressBookDTO.getLastName());
             addressBook.setAddress(updatedAddressBookDTO.getAddress());
+            addressBook.setEmail(updatedAddressBookDTO.getEmail());
             addressBook.setPhoneNumber(updatedAddressBookDTO.getPhoneNumber());
             addressBookRepository.save(addressBook);
             return true;
@@ -96,6 +98,7 @@ public class AddressBookService implements IAddressBookService {
      * @param id - The ID of the address book entry to be deleted
      */
     @Override
+    @CacheEvict(value = "addressBookCache", key = "#id")
     public void deleteAddressBookData(long id) {
         try {
             addressBookRepository.deleteById(id);
