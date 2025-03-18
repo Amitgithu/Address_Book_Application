@@ -18,6 +18,7 @@ import java.io.Serializable;
  * It contains fields for first name, last name, email, address, and phone number.
  * It also includes validation annotations to ensure the data meets certain criteria.
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
