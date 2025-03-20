@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import java.util.Date;
  * Utility class to create and decode JWT tokens.
  * It uses the HMAC256 algorithm for signing the tokens.
  */
-
+@Slf4j
 @Component
 public class JwtToken {
 
@@ -30,7 +31,6 @@ public class JwtToken {
      * This method is called after the bean is created.
      * It initializes the TOKEN_SECRET variable with the value from environment variables.
      */
-
     @PostConstruct
     public void init() {
         TOKEN_SECRET = env.getProperty("CLIENT_SECRET");
@@ -119,7 +119,8 @@ public class JwtToken {
     public boolean isTokenExpired(String token) {
         try {
             JWTVerifier verifier = JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).build();        // Creating a JWT verifier with the same algorithm used for signing
-            DecodedJWT decodedJWT = verifier.verify(token);                 // Verifying the token
+            DecodedJWT decodedJWT = verifier.verify(token); // Verifying the token
+            log.info(String.valueOf(decodedJWT));
             return decodedJWT.getExpiresAt().before(new Date());          // Checking if the token is expired
         } catch (JWTVerificationException e) {
             throw new RuntimeException("Invalid or expired token.");
