@@ -38,20 +38,6 @@ Imagine you are opening a coffee shop. Instead of building the entire store from
 A well-organized project helps maintain scalability and readability.
 
 
-my-spring-boot-app/
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/
-│   │   │   ├── controllers/
-│   │   │   ├── services/
-│   │   │   ├── repositories/
-│   │   │   ├── models/
-│   │   ├── resources/
-│   │   │   ├── application.properties
-│   ├── test/
-│   │   ├── java/com/example/
-
-
 ### Why is Folder Structure Important?
 - Keeps code modular and maintainable.
 - Follows industry standards for easier collaboration.
