@@ -10,7 +10,8 @@
 6. [RabbitMQ Overview](#rabbitmq-overview)
 7. [Redis Caching](#redis-caching)
 8. [Spring Boot Frontend](#spring-boot-frontend)
-9. [Resources](#resources)
+9. [Exception Handling, Validation, and Testing](#exception-handling-validation-and-testing)
+10. [Resources](#resources)
 
 
 
@@ -140,9 +141,27 @@ Spring Boot can integrate with frontend frameworks like React, Angular, and Vue.
 
 🔗 **[Spring Boot Frontend](https://chatgpt.com/share/67d71515-7364-8002-aa06-a842afc88459)**
 
+## 9. Exception Handling, Validation, and Testing
+
+### Exception Handling
+Learn how to handle exceptions globally and provide user-friendly error responses.
+
+🔗 **[Exception Handling](https://chatgpt.com/share/680cd8d9-87e8-8002-a966-35227d0be0fb)**
 
 
-## 9. Resources
+### Fields Validation in Spring
+Understand how to validate input fields like emails, phone numbers, or custom constraints using annotations like `@Valid`, `@NotBlank`, `@Email`, etc.
+
+🔗 **[Fields Validation in Spring](https://chatgpt.com/share/680cdabf-8208-8002-b4ec-0de4a7e8b561)**
+
+
+### JUnit Testing and Mockito
+Learn how to write unit tests and mock dependencies to test Spring Boot applications effectively.
+
+🔗 **[Junit Testing and Mockito](https://chatgpt.com/share/680d29f6-b208-8002-a379-9cc2e6879178)**
+
+
+## 10. Resources
 ### YouTube Playlists for Spring Boot Learning:
 - [Spring Boot by Smart Programming](https://youtube.com/playlist?list=PLlhM4lkb2sEgJDGj2zOJnp0y5A5E6li1k&si=A-MlMmmtPZCFRDPU)
 - [Spring Boot by Engineering Digest](https://youtube.com/playlist?list=PLA3GkZPtsafacdBLdd3p1DyRd5FGfr3Ue&si=aqtdUpoNfct6jv6n)
